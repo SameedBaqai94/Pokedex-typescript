@@ -7,7 +7,7 @@ export type PokemonList = {
     id: number
     name: string
     gif: string
-    type: PokemonType[]
+    types: PokemonType[]
     stats: PokemonStats[]
 }
 type PokemonStats = {
