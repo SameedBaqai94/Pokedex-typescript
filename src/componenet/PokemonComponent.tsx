@@ -3,10 +3,10 @@ import { usePokemonContext } from "../context/pokemonContext";
 import { PokeCard } from "./Pokecard";
 
 export const PokemonComponent = () => {
-    const { pokemonList } = usePokemonContext();
+    const { filteredPokemonList } = usePokemonContext();
     return (
         <Row lg={3} style={{ margin: "auto" }}>
-            {pokemonList.map(pokemon => (
+            {filteredPokemonList.map(pokemon => (
                 <PokeCard key={pokemon.id} pokemon={pokemon} />
             ))}
         </Row>

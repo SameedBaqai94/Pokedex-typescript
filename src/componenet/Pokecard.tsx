@@ -13,6 +13,7 @@ const StatDiv = styled.div`
 
 `
 export function PokeCard({ pokemon }: PokeCardProps) {
+
     return (
         <Col className="d-flex">
             <Card style={{ width: "40rem ", padding: "10px" }}>
@@ -22,16 +23,17 @@ export function PokeCard({ pokemon }: PokeCardProps) {
                         <Card.Title>{pokemon.name}</Card.Title>
                     </div>
                     <div className="flex-grow-1">
-                        {pokemon.types.map(type => (
-                            <TypeDiv>
-                                <Card.Text>Type: <span>{type.name}</span></Card.Text>
-                            </TypeDiv>
-                        ))}
+                        {
+                            pokemon.types.map(type => (
+                                <TypeDiv key={type.id}>
+                                    <Card.Text>Type: <span>{type.name}</span></Card.Text>
+                                </TypeDiv>
+                            ))}
                     </div>
-                    <div className="flex-grow-1">
+                    <div className="flex-grow-1" style={{ borderLeft: "1px solid black" }}>
                         {pokemon.stats.map(stat => (
-                            <div>
-                                <Card.Text>{stat.statName}:{stat.baseStat}</Card.Text>
+                            <div key={stat.statName} style={{ marginLeft: "5px" }}>
+                                <Card.Text>{stat.statName}: <span>{stat.baseStat}</span></Card.Text>
                             </div>
                         ))}
                     </div>

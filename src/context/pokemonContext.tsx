@@ -21,7 +21,8 @@ type PokemonType = {
 }
 
 type PokemonContextProps = {
-    pokemonList: PokemonList[]
+    filteredPokemonList: PokemonList[]
+    filterList: (value: string) => void
 }
 const PokemonContext = createContext({} as PokemonContextProps);
 
@@ -32,6 +33,7 @@ export const usePokemonContext = () => {
 export const PokemonContextProvider = ({ children }: PokemonContextProviderProp) => {
 
     const [pokemonList, setPokemonList] = useState<PokemonList[]>([]);
+    const [filteredPokemonList, setFilteredPokemonList] = useState<PokemonList[]>([]);
 
     useEffect(() => {
         let fetched = true;
@@ -65,6 +67,7 @@ export const PokemonContextProvider = ({ children }: PokemonContextProviderProp)
             if (fetched) {
                 Promise.all(pokemonDatas).then((result) => {
                     setPokemonList(result);
+                    setFilteredPokemonList(result);
                 })
             }
         }
@@ -75,8 +78,21 @@ export const PokemonContextProvider = ({ children }: PokemonContextProviderProp)
         }
     }, [])
 
+    function filterList(value: string) {
+        let copyList = [...pokemonList];
+
+        if (value === "") {
+            setFilteredPokemonList(pokemonList);
+        }
+        else {
+            let check = copyList.filter((e) => e.name.includes(value));
+            setFilteredPokemonList(check);
+        }
+        console.log(value);
+
+    }
     return (
-        <PokemonContext.Provider value={{ pokemonList }} >
+        <PokemonContext.Provider value={{ filteredPokemonList, filterList }} >
             {children}
         </PokemonContext.Provider >
     )
