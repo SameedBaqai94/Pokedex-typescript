@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { PokemonContextProvider } from './context/pokemonContext';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(
@@ -11,9 +13,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PokemonContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </PokemonContextProvider>
   </React.StrictMode>
 );
 
